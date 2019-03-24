@@ -11,12 +11,10 @@ class DB {
                  return this.executeQuery(client, query);
             })
             .then(result => {
-                console.log('Resut from query promise is',result);
                 resolve(result);
             })
             
         }.bind(this)).catch(error => {
-         console.log(error);
          reject(error);
         })
 
@@ -26,10 +24,8 @@ class DB {
         return new Promise(function(resolve, reject) {
             MongoClient.connect(url, null, function(err, client){
                 if(err) {
-                    console.log('error while connection making with mongo');
                     reject(err);
                 } else {
-                    console.log('connection established with mongo');
                     resolve(client);
                 }
             })
@@ -46,10 +42,8 @@ class DB {
                 .find(query)
                 .toArray((err, data) => {
                     if(err) {
-                        console.log('error from query', err);
                         reject(err) ;
                     } else {
-                        console.log( 'result from query', (data[0]));
                         resolve(data[0]);
                     }
                     client.close();
